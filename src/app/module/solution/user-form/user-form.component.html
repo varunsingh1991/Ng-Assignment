@@ -1,0 +1,82 @@
+  <div class="modal-header">
+		<h4 class="modal-title">Edit User</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+	</div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+	<div class="modal-body">
+    <input type="text" class="form-control d-none" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+
+    <div class="form-group form-row">
+      <label class="col-md-3">Upload Image</label>
+      <div class="col-md-9">
+        <input type="file" id="image" (change)="onSelectedFile($event)" />
+        <div [innerHTML]="uploadError" class="error"></div>
+        <div *ngIf="imagePath">
+          <br />
+          <img [src]="imagePath" width="100px">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" formControlName="firstName"  class="form-control" id="firstName" aria-describedby="firstName" placeholder="First Name">
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" formControlName="lastName" class="form-control" id="lastName" placeholder="Last Name">
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="text" formControlName="age" class="form-control" id="age" placeholder="Age">
+    </div>
+
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <input type="text" formControlName="gender" class="form-control" id="gender" placeholder="Gender">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" formControlName="email" class="form-control" id="email" placeholder="Email">
+    </div>
+
+    <div formGroupName="company">
+      <div class="form-group">
+        <label for="companyName">Company Name</label>
+        <input type="text" formControlName="name" class="form-control" id="companyName" placeholder="Company Name">
+      </div>
+
+   </div>
+
+   <div formGroupName="address">
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" formControlName="address" class="form-control" id="address" placeholder="Address">
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" formControlName="city" class="form-control" id="city" placeholder="City">
+    </div>
+    <div class="form-group">
+      <label for="postalCode">Postal Code</label>
+      <input type="text" formControlName="postalCode" class="form-control" id="postalCode" placeholder="Postal Code">
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" formControlName="state" class="form-control" id="state" placeholder="State">
+    </div>
+
+ </div>
+    <div>
+
+    </div>
+
+  </div>
+	<div class="modal-footer">
+    <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Submit</button>
+		<button type="button" class="btn btn-light" (click)="activeModal.dismiss('Cross click')">Close</button>
+	</div>
+</form>

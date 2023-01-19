@@ -1,0 +1,91 @@
+
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex flex-column flex-sm-row justify-content-between  ">
+      <h3>Users List</h3>
+      <div class=" d-flex">
+        <div class="form-group" style="margin-right: 10px; margin-top: 4px;">
+          <input type="text" (keyup)="searchInput($event)"  class="form-control " id="search" aria-describedby="firstName" placeholder="Search" >
+        </div>
+        <button class="btn btn-primary"  (click)="openNewModal()">Add New</button>
+
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Picture</th>
+          <th scope="col">Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Email</th>
+          <th scope="col">Company Name</th>
+          <th scope="col">Address</th>
+          <th scope="col">
+            <i class="fa fa-ellipsis-v" aria-hidden="true" ></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i=index;">
+          <td scope="row">{{i+1}}</td>
+          <td >
+            <ng-template #{{user.id}}>
+              <img [src]="user.image" class="img-responsive">
+            </ng-template>
+            <i [ngbTooltip]=user.id class="fa fa-file-image-o" aria-hidden="true"></i>
+          </td>
+          <td>{{user.firstName}} {{user.lastName}}</td>
+          <td>{{user.age}}</td>
+          <td>{{user.gender}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.company.name}}</td>
+          <td>{{user.address.address}}, {{user.address.city}}, {{user.address.postalCode}}, {{user.address.state}}</td>
+          <td>
+            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+              <a id="dropdownManual" (focus)="myDrop.open()" href="javascript:void(0)">
+                <i class="fa fa-ellipsis-v" aria-hidden="true" ></i>
+              </a>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <button ngbDropdownItem (click)="openModal(user.id)">Edit</button>
+                <button ngbDropdownItem (click)="delete(user.id)" >Delete</button>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+      <div class="d-flex flex-column flex-sm-row justify-content-between  ">
+            <p class="">Total : {{total}}</p>
+
+        <div class="mt-2 d-flex" >
+          <div class="mr-5 row" style="margin-right:10px;">
+            View Per page :
+            <select (change)="setLimit($event)" class="form-select" style="width:100px; margin-right:10px; margin-left:10px; margin-top:-10px;">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </div>
+
+          <a *ngIf="skip!=0" href="javascript:void(0)" (click)="callPreviousUserLot()"><< Previous </a>
+          <span *ngIf="skip!=0 && skip<=total "> &nbsp;||&nbsp;</span>
+          <a   *ngIf="skip<=total"href="javascript:void(0)" (click)="callNextUserLot()"> Next >> </a>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div >
+
+  <div>
+
+  </div>
+</div>
